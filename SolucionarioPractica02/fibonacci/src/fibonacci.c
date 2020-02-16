@@ -5,8 +5,7 @@
 int thread_count;
 int cantidad;
 int fibonacci = 0;
-int numero1 = 0;
-int numero2 = 1;
+int numero[] = {0,1};
 
 void *Suma(void* rank);
 
@@ -28,7 +27,7 @@ int main(int argc, char* argv[]) {
 	   pthread_join(thread_handles[thread], NULL);
    }
 
-   printf("Resultado: %d", fibonacci);
+   printf("Resultado: %d \n", fibonacci);
 
    free(thread_handles);
    return 0;
@@ -42,10 +41,11 @@ void *Suma(void* rank) {
    int fin = (my_rank+1)*local_m;
 
    for(int i = inicio; i < fin; i++){
-	   int suma = numero1 + numero2;
+	   int suma = numero[0] + numero[1];
 	   fibonacci = suma;
-	   numero1 = numero2;
-	   numero2 = suma;
+	   numero[0] = numero[1];
+	   numero[1] = suma;
    }
    return NULL;
 }
+
